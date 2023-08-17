@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Project University/Assets/Scenes/GameScene.unity.meta
 guid: 77e569eadf0730a4385c918ab9d38148
+========
+guid: 7cda455a47e82f647bfbd1ea7c2aee67
+folderAsset: yes
+>>>>>>>> c4978d4229cc16a0e0201f412047084bd76d5d70:Project University/Assets/Art/animalDice/size84.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

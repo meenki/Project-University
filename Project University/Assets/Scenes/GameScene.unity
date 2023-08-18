@@ -343,12 +343,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 145875470}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -401,12 +401,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 145875465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf13605b1db83b4885a4f9c2149dbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
   cost: {fileID: 1704880054}
-  level: {fileID: 1332561708}
+  levelText: {fileID: 1332561708}
 --- !u!1 &180124479
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24, y: -25}
+  m_AnchoredPosition: {x: -21, y: -25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683919352
@@ -2451,13 +2451,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145875470}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1146596563}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2510,12 +2510,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1146596558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf13605b1db83b4885a4f9c2149dbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
   cost: {fileID: 1997769048}
-  level: {fileID: 1638331337}
+  levelText: {fileID: 1638331337}
 --- !u!1 &1195369271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,7 +2936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24, y: -25}
+  m_AnchoredPosition: {x: -21, y: -25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235606203
@@ -3632,7 +3632,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24, y: -25}
+  m_AnchoredPosition: {x: -25, y: -25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1332561708
@@ -3971,6 +3971,7 @@ GameObject:
   - component: {fileID: 1450810960}
   - component: {fileID: 1450810959}
   - component: {fileID: 1450810958}
+  - component: {fileID: 1450810961}
   m_Layer: 5
   m_Name: SummonDiceButton
   m_TagString: Untagged
@@ -4041,7 +4042,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1450810959}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1450810961}
+        m_TargetAssemblyTypeName: DiceButton, Assembly-CSharp
+        m_MethodName: NewDice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1450810959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4080,6 +4093,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450810956}
   m_CullTransparentMesh: 1
+--- !u!114 &1450810961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450810956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1473163203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4118,7 @@ GameObject:
   - component: {fileID: 1473163204}
   - component: {fileID: 1473163207}
   - component: {fileID: 1473163208}
+  - component: {fileID: 1473163209}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4245,12 +4271,47 @@ MonoBehaviour:
   - Type: 4
     damage: 15
     attackSpeed: 0.8
-  diceLevel: 0100000001000000010000000100000001000000
   startSummonCost: 150
   increaseSummonCost: 10
-  upgradeCost: 50
+  upgradeCost: 3200000064000000c800000090010000
+  upgradeDamage:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
+  levelDamage:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.8
   startLife: 10
   startMoney: 450
+  killMoney: 10
+  diceLevel: 0100000001000000010000000100000001000000
+--- !u!114 &1473163209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473163203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c9465cb69fd1f40ba5484dbd3dd6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyWay:
+  - {fileID: 815000755}
+  - {fileID: 1487579897}
+  - {fileID: 1542880543}
+  - {fileID: 1904011794}
+  enemyPrefab: {fileID: 3642239504990290787, guid: 0f3a90674e26022439f3d39a3494e06c, type: 3}
+  enemyBox: []
+  enemyParent: {fileID: 1577650180}
+  boxNum: 100
+  spawnTime: 1
 --- !u!1 &1485657566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4767,6 +4828,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1577650179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1577650180}
+  m_Layer: 0
+  m_Name: EnemyBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1577650180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577650179}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.346281, y: 4.507763, z: 7659.5493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1638331335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,7 +4893,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24, y: -25}
+  m_AnchoredPosition: {x: -22, y: -25}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638331337
@@ -5907,13 +5999,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145875470}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2032588262}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5966,12 +6058,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2032588257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf13605b1db83b4885a4f9c2149dbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   cost: {fileID: 722133727}
-  level: {fileID: 1661406235}
+  levelText: {fileID: 1661406235}
 --- !u!1 &2101865461
 GameObject:
   m_ObjectHideFlags: 0
@@ -6031,8 +6123,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12345
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 77d9fe3bdfcfe2e44b82cf6ffe8deaeb, type: 2}
-  m_sharedMaterial: {fileID: 7211333973255091986, guid: 77d9fe3bdfcfe2e44b82cf6ffe8deaeb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 45bcccbfe649e3b4e8207c3d0f9c9547, type: 2}
+  m_sharedMaterial: {fileID: 7211333973255091986, guid: 45bcccbfe649e3b4e8207c3d0f9c9547, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6191,13 +6283,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145875470}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2116891111}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6250,12 +6342,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2116891106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf13605b1db83b4885a4f9c2149dbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
   cost: {fileID: 1139912681}
-  level: {fileID: 683919352}
+  levelText: {fileID: 683919352}
 --- !u!1 &2137999372
 GameObject:
   m_ObjectHideFlags: 0
@@ -6341,13 +6433,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145875470}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2137999377}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UpgradeDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6400,17 +6492,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2137999372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d77f7469012c4b8909be6f770535b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cf13605b1db83b4885a4f9c2149dbf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
   cost: {fileID: 132498231}
-  level: {fileID: 1235606203}
+  levelText: {fileID: 1235606203}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1473163206}
+  - {fileID: 1577650180}
   - {fileID: 1390569287}
   - {fileID: 1057837288}
   - {fileID: 1396422514}

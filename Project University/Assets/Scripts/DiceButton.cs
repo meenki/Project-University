@@ -5,13 +5,8 @@ using UnityEngine;
 
 public class DiceButton : MonoBehaviour
 {
-    public DiceType type;
-    public TextMeshProUGUI cost;
-    public TextMeshProUGUI level;
-
-    void Awake()
+    public void NewDice()
     {
-        cost.text = GameManager.Instance.upgradeCost.ToString();
-        level.text = GameManager.Instance.diceLevel[(int)type].ToString();
+
     }
 }

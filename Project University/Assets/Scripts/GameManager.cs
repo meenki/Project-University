@@ -19,7 +19,8 @@ public enum EnemyType
 {
     Normal,
     Speed,
-    Boss
+    Boss,
+    End
 }
 
 [System.Serializable]
@@ -39,7 +40,18 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI summonCostText;
 
-    public Transform[] diceBoard;
+    public GameObject bulletPrefab;
+    public Transform bulletParent;
+    public GameObject[] bulletBox;
+    public int bulletNum;
+
+    public Sprite[] fireDice;
+    public Sprite[] windDice;
+    public Sprite[] voltDice;
+    public Sprite[] iceDice;
+    public Sprite[] bossDice;
+
+    public Dice[] diceBoard;
     public DiceInfo[] diceInfo = new DiceInfo[(int)DiceType.End];
     public int startSummonCost = 150;
     public int increaseSummonCost = 10;
@@ -50,7 +62,10 @@ public class GameManager : MonoBehaviour
 
     public int startLife = 10;
     public int startMoney = 450;
-    public int killMoney = 10;
+    public int startKillMoney = 10;
+
+    [HideInInspector]
+    public int curKillMoney = 10;
 
     [HideInInspector]
     public int[] diceLevel = new int[(int)DiceType.End];
@@ -61,17 +76,12 @@ public class GameManager : MonoBehaviour
     int summonCount = 0;
     bool[] isInDice;
 
-    // 쥐 개수 10 + 2 * ( Wave - 1 )
-    // 쥐 체력 50 + 25 * ( Wave - 1 )
-    // 보스 체력 = 50 * ( wave - 1 ) ^ 2 + 250 * ( wave - 1 ) + 200
-    // 해당 웨이브 쥐 잡을 시 골드 = 이전 웨이브 쥐 마리 당 골드 + 웨이브
-
     private static GameManager instance = null;
     public static GameManager Instance
     {
         get
         {
-            return instance; 
+            return instance;
         }
         private set { instance = value; }
     }
@@ -86,18 +96,24 @@ public class GameManager : MonoBehaviour
         wave = 1;
         money = startMoney;
         life = startLife;
-        summonCount = startSummonCost;
         isInDice = new bool[diceBoard.Length];
 
-        for(int i = 0; i < diceLevel.Length; ++i)
+        for (int i = 0; i < diceLevel.Length; ++i)
         {
             diceLevel[i] = 1;
+        }
+
+        bulletBox = new GameObject[bulletNum];
+        for (int i = 0; i < bulletNum; i++)
+        {
+            bulletBox[i] = Instantiate(bulletPrefab, bulletParent);
+            bulletBox[i].SetActive(false);
         }
 
         waveText.text = wave.ToString();
         lifeText.text = life.ToString();
         moneyText.text = money.ToString();
-        summonCostText.text = summonCount.ToString();
+        summonCostText.text = startSummonCost.ToString();
 
         WaveStart();
     }
@@ -106,6 +122,20 @@ public class GameManager : MonoBehaviour
     {
         if (money >= startSummonCost + summonCount * increaseSummonCost)
         {
+            bool isEmpty = false;
+            for (int i = 0; i < isInDice.Length; ++i)
+            {
+                if (isInDice[i] == false)
+                {
+                    isEmpty = true;
+                    break;
+                }
+            }
+            if (!isEmpty)
+            {
+                return;
+            }
+
             while (true)
             {
                 int rand = Random.Range(0, isInDice.Length);
@@ -116,6 +146,8 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     isInDice[rand] = true;
+                    var type = Random.Range(0, (int)DiceType.End);
+                    diceBoard[rand].InitDice(diceInfo[type]);
 
                     break;
                 }
@@ -123,7 +155,65 @@ public class GameManager : MonoBehaviour
 
             money -= startSummonCost + summonCount * increaseSummonCost;
             summonCount++;
+            moneyText.text = money.ToString();
+            summonCostText.text = (startSummonCost + summonCount * increaseSummonCost).ToString();
         }
+    }
+
+    public void Attack(Dice dice, Enemy target)
+    {
+        if (dice.type == DiceType.Volt)
+        {
+            int count = 2;
+            for (int i = 0; i < bulletBox.Length; ++i)
+            {
+                if (!bulletBox[i].activeSelf)
+                {
+                    for (int j = 0; j < generator.enemyBox.Length; ++j)
+                    {
+                        if (generator.enemyBox[j].activeSelf)
+                        {
+                            if (generator.enemyBox[j] == target) continue;
+                            bulletBox[i].GetComponent<Bullet>().Shot(dice, generator.enemyBox[i].GetComponent<Enemy>());
+
+                            count--;
+                            if (count == 0) break;
+                        }
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < bulletBox.Length; ++i)
+        {
+            if (!bulletBox[i].activeSelf)
+            {
+                bulletBox[i].GetComponent<Bullet>().Shot(dice, target);
+                break;
+            }
+        }
+    }
+
+    public Enemy GetTarget()
+    {
+        Enemy target = null;
+        for (int i = 0; i < generator.enemyBox.Length; ++i)
+        {
+            if (generator.enemyBox[i].activeSelf)
+            {
+                if (target == null)
+                    target = generator.enemyBox[i].GetComponent<Enemy>();
+                else
+                {
+                    if (target.distance < generator.enemyBox[i].GetComponent<Enemy>().distance)
+                    {
+                        target = generator.enemyBox[i].GetComponent<Enemy>();
+                    }
+                }
+
+            }
+        }
+
+        return target;
     }
 
     public bool UpgradeDice(DiceType type)
@@ -132,8 +222,8 @@ public class GameManager : MonoBehaviour
 
         if (upgradeCost[diceLevel[(int)type] - 1] <= money)
         {
+            money -= upgradeCost[diceLevel[(int)type] - 1];
             diceLevel[(int)type]++;
-            money -= upgradeCost[diceLevel[(int)type]];
             moneyText.text = money.ToString();
             return true;
         }
@@ -142,20 +232,54 @@ public class GameManager : MonoBehaviour
 
     public void WaveStart()
     {
+        generator.WaveStart(wave);
+        waveText.text = wave.ToString();
+    }
 
+    // 해당 웨이브 쥐 잡을 시 골드 = 이전 웨이브 쥐 마리 당 골드 + 웨이브
+    public void KillEnemy()
+    {
+        generator.curEnemy--;
+        money += curKillMoney;
+        moneyText.text = money.ToString();
+
+        if (isWaveEnd())
+        {
+            WaveStart();
+        }
     }
 
     public void DecreaseLife()
     {
-        --life;
-        if(life == 0)
+        life--;
+        generator.curEnemy--;
+        lifeText.text = life.ToString();
+
+        if (life == 0)
         {
             GameOver();
         }
+
+        if (isWaveEnd())
+        {
+            WaveStart();
+        }
+    }
+
+    public bool isWaveEnd()
+    {
+        if (generator.curEnemy > 0 || generator.spawnEnemy > 0)
+        {
+            return false;
+        }
+
+        ++wave;
+
+        return true;
     }
 
     public void GameOver()
     {
-
+        // 결과창
     }
 }

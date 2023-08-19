@@ -7,6 +7,6 @@ public class DiceButton : MonoBehaviour
 {
     public void NewDice()
     {
-
+        GameManager.Instance.NewDice();
     }
 }

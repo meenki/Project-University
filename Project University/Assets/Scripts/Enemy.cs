@@ -12,20 +12,71 @@ public class Enemy : MonoBehaviour
     public Sprite bossRat;
 
     public float hp;
-    public float speed = 2;
+    public float speed;
     public EnemyType type;
 
+    public float distance;
+
     int targetNum = 0;
-    Transform direction;
 
     public void ActiveEnemy(EnemyType type, float hp, float speed)
     {
+        distance = 0;
         transform.position = enemyWay[0].position;
         this.type = type;
+
         this.hp = hp;
         this.speed = speed;
 
+        switch (type)
+        {
+            case EnemyType.Normal:
+                sprite.sprite = normalRat;
+                break;
+            case EnemyType.Speed:
+                sprite.sprite = speedRat;
+                this.hp = hp / 2;
+                this.speed = speed * 2;
+                break;
+            case EnemyType.Boss:
+                sprite.sprite = bossRat;
+                break;
+        }
+
         targetNum = 1;
+        gameObject.SetActive(true);
+    }
+
+    public void Hit(Dice info)
+    {
+        var damage = info.damage * GameManager.Instance.levelDamage[GameManager.Instance.diceLevel[(int)info.type]] * GameManager.Instance.upgradeDamage[info.level];
+
+        switch (info.type)
+        {
+            case DiceType.Fire:
+                break;
+            case DiceType.Wind:
+                break;
+            case DiceType.Volt:
+                break;
+            case DiceType.Ice:
+                speed *= 0.5f;
+                break;
+            case DiceType.Boss:
+                if(this.type == EnemyType.Boss)
+                {
+                    damage *= 2;
+                }
+                break;
+        }
+
+        hp -= damage;
+
+        if (hp < 0)
+        {
+            GameManager.Instance.KillEnemy();
+            gameObject.SetActive(false);
+        }
     }
 
     public void Update()
@@ -54,7 +105,10 @@ public class Enemy : MonoBehaviour
             if (transform.position.x < enemyWay[targetNum].position.x)
             {
                 transform.position = enemyWay[targetNum].position;
+                this.gameObject.SetActive(false);
+                GameManager.Instance.DecreaseLife();
             }
         }
+        distance += speed * Time.deltaTime;
     }
 }

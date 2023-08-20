@@ -34,4 +34,9 @@ public class IsClick : MonoBehaviour
             // 해당하는 버튼에 맞춰 끄기
         }
     }
+
+    void PauseButton()
+    {
+
+    }
 }

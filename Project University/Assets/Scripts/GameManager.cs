@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
 {
     public Generator generator;
 
+    public GameObject DoneObj;
+    public TextMeshProUGUI ResultText;
+    public TextMeshProUGUI PauseText;
     public TextMeshProUGUI waveText;
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI moneyText;
@@ -111,6 +114,8 @@ public class GameManager : MonoBehaviour
         }
 
         waveText.text = wave.ToString();
+        PauseText.text = wave.ToString();
+        ResultText.text = wave.ToString();
         lifeText.text = life.ToString();
         moneyText.text = money.ToString();
         summonCostText.text = startSummonCost.ToString();
@@ -234,6 +239,8 @@ public class GameManager : MonoBehaviour
     {
         generator.WaveStart(wave);
         waveText.text = wave.ToString();
+        PauseText.text = wave.ToString();
+        ResultText.text = wave.ToString();
     }
 
     // 해당 웨이브 쥐 잡을 시 골드 = 이전 웨이브 쥐 마리 당 골드 + 웨이브
@@ -281,5 +288,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // 결과창
+        DoneObj.SetActive(true);
     }
 }

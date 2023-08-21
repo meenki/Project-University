@@ -17,27 +17,12 @@ public class Dice : MonoBehaviour
     float elapsed = 0;
     Enemy target = null;
 
+    public bool isSelected = false;
+
+    List<Dice> collDiceList = new List<Dice>();
+
     public void InitDice(DiceInfo info)
     {
-        switch (info.Type)
-        {
-            case DiceType.Fire:
-                sprite.sprite = GameManager.Instance.fireDice[0];
-                break;
-            case DiceType.Wind:
-                sprite.sprite = GameManager.Instance.windDice[0];
-                break;
-            case DiceType.Volt:
-                sprite.sprite = GameManager.Instance.voltDice[0];
-                break;
-            case DiceType.Ice:
-                sprite.sprite = GameManager.Instance.iceDice[0];
-                break;
-            case DiceType.Boss:
-                sprite.sprite = GameManager.Instance.bossDice[0];
-                break;
-        }
-
         this.level = 1;
         this.type = info.Type;
         this.damage = info.damage;
@@ -45,12 +30,74 @@ public class Dice : MonoBehaviour
         elapsed = 0;
         target = null;
 
+        switch (type)
+        {
+            case DiceType.Fire:
+                sprite.sprite = GameManager.Instance.fireDice[level - 1];
+                break;
+            case DiceType.Wind:
+                sprite.sprite = GameManager.Instance.windDice[level - 1];
+                break;
+            case DiceType.Volt:
+                sprite.sprite = GameManager.Instance.voltDice[level - 1];
+                break;
+            case DiceType.Ice:
+                sprite.sprite = GameManager.Instance.iceDice[level - 1];
+                break;
+            case DiceType.Boss:
+                sprite.sprite = GameManager.Instance.bossDice[level - 1];
+                break;
+        }
+
         gameObject.SetActive(true);
     }
 
     public void LevelUpDice()
     {
+        level++;
+        switch (type)
+        {
+            case DiceType.Fire:
+                sprite.sprite = GameManager.Instance.fireDice[level - 1];
+                break;
+            case DiceType.Wind:
+                sprite.sprite = GameManager.Instance.windDice[level - 1];
+                break;
+            case DiceType.Volt:
+                sprite.sprite = GameManager.Instance.voltDice[level - 1];
+                break;
+            case DiceType.Ice:
+                sprite.sprite = GameManager.Instance.iceDice[level - 1];
+                break;
+            case DiceType.Boss:
+                sprite.sprite = GameManager.Instance.bossDice[level - 1];
+                break;
+        }
+    }
 
+    public void DropDice()
+    {
+        if(collDiceList.Count > 0)
+        {
+            float distacne = float.MaxValue;
+
+            Dice target = null;
+            for(int i = 0; i < collDiceList.Count; i++)
+            {
+                if (distacne > Vector3.Distance(collDiceList[i].transform.position, transform.position))
+                {
+                    target = collDiceList[i];
+                }
+            }
+
+            if (target.type == this.type && target.level < 5)
+            {
+                target.LevelUpDice();
+                this.gameObject.SetActive(false);
+            }
+
+            collDiceList.Clear();
+        }
     }
 
     public void Update()
@@ -81,6 +128,21 @@ public class Dice : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (!isSelected) return;
+        var obj = collision.gameObject.GetComponent<Dice>();
+        if (obj != null)
+        {
+            collDiceList.Add(obj);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!isSelected) return;
+        var obj = collision.gameObject.GetComponent<Dice>();
+        if(obj != null)
+        {
+            collDiceList.Remove(obj);
+        }
     }
 }

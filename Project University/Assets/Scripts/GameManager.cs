@@ -79,6 +79,9 @@ public class GameManager : MonoBehaviour
     int summonCount = 0;
     bool[] isInDice;
 
+    GameObject hitObject = null;
+    Vector3 objPrePos = Vector3.zero;
+
     private static GameManager instance = null;
     public static GameManager Instance
     {
@@ -283,6 +286,52 @@ public class GameManager : MonoBehaviour
         ++wave;
 
         return true;
+    }
+
+    public void Update()
+    {
+        if(hitObject != null)
+        {
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            hitObject.transform.position = worldPoint;
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            if (hitObject == null)
+            {
+                RayCast(Input.mousePosition);
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            if(hitObject != null)
+            {
+                hitObject.GetComponent<Dice>().DropDice();
+                hitObject.transform.position = objPrePos;
+                Destroy(hitObject.GetComponent<Rigidbody2D>());
+                hitObject.GetComponent<Dice>().isSelected = false;
+            }
+            
+            hitObject = null;
+        }
+    }
+
+    void RayCast(Vector3 mousePos)
+    {
+        Vector2 worldPoint = Camera.main.ScreenToWorldPoint(mousePos);
+        RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.GetComponent<Dice>() != null)
+            {
+                objPrePos = hit.collider.transform.position;
+                hitObject = hit.collider.gameObject;
+                hitObject.GetComponent<Dice>().isSelected = true;
+                hitObject.AddComponent<Rigidbody2D>();
+            }
+        }
     }
 
     public void GameOver()

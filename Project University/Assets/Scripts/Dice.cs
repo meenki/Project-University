@@ -77,7 +77,8 @@ public class Dice : MonoBehaviour
 
     public void DropDice()
     {
-        if(collDiceList.Count > 0)
+
+        if (collDiceList.Count > 0)
         {
             float distacne = float.MaxValue;
 
@@ -90,7 +91,7 @@ public class Dice : MonoBehaviour
                 }
             }
 
-            if (target.type == this.type && target.level < 5)
+            if (target.type == this.type && target.level < 5 && target.level == this.level)
             {
                 target.LevelUpDice();
                 this.gameObject.SetActive(false);
@@ -143,6 +144,7 @@ public class Dice : MonoBehaviour
         if(obj != null)
         {
             collDiceList.Remove(obj);
+
         }
     }
 }

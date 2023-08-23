@@ -4,6 +4,7 @@ using System.Threading;
 using System.Xml.Schema;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum DiceType
 {
@@ -72,6 +73,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public int[] diceLevel = new int[(int)DiceType.End];
+
+    public GameObject killPrefab;
+
 
     int wave = 0;
     int money = 0;
@@ -307,6 +311,8 @@ public class GameManager : MonoBehaviour
         {
             if(hitObject != null)
             {
+             
+
                 hitObject.GetComponent<Dice>().DropDice();
                 hitObject.transform.position = objPrePos;
                 Destroy(hitObject.GetComponent<Rigidbody2D>());

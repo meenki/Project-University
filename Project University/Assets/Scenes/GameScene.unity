@@ -547,6 +547,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &180124483
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -696,6 +697,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &325855083
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -845,6 +847,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &358811719
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1040,6 +1043,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &507585115
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1189,6 +1193,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &540468776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1488,6 +1493,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &592490256
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1637,6 +1643,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &614550859
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1920,6 +1927,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &691032943
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2203,6 +2211,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &731733722
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2362,6 +2371,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &811362648
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2511,6 +2521,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &813750523
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2691,6 +2702,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &836549488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3008,6 +3020,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &996292222
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3197,6 +3210,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1046672063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3755,6 +3769,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1195369275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3904,6 +3919,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1203143720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4405,6 +4421,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1277171997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4688,6 +4705,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1285819701
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5406,6 +5424,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1437622552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5820,6 +5839,7 @@ MonoBehaviour:
   startKillMoney: 10
   curKillMoney: 10
   diceLevel: 0100000001000000010000000100000001000000
+  killPrefab: {fileID: 1247311384876784, guid: 484dd1e4b4fa72549a3dd5b4eea63104, type: 3}
 --- !u!114 &1473163209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5954,6 +5974,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1485657570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6218,6 +6239,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1534916454
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7109,6 +7131,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1731760868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7421,6 +7444,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1829625176
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7581,6 +7605,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1880452759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7761,6 +7786,7 @@ MonoBehaviour:
   damage: 0
   attackSpeed: 0
   index: 0
+  isSelected: 0
 --- !u!61 &1950931571
 BoxCollider2D:
   m_ObjectHideFlags: 0

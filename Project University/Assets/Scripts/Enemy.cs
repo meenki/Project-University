@@ -23,10 +23,12 @@ public class Enemy : MonoBehaviour
     public void Awake()
     {
         attackEffect = Instantiate(GameManager.Instance.killPrefab, transform);
-        attackEffect.SetActive(false);  
+        attackEffect.SetActive(false);
     }
     public void ActiveEnemy(EnemyType type, float hp, float speed)
     {
+       
+
         distance = 0;
         transform.position = enemyWay[0].position;
         this.type = type;
@@ -56,7 +58,7 @@ public class Enemy : MonoBehaviour
     public void Hit(Dice info)
     {
         var damage = info.damage * GameManager.Instance.levelDamage[GameManager.Instance.diceLevel[(int)info.type]] * GameManager.Instance.upgradeDamage[info.level];
-        attackEffect.SetActive(false);
+      //  attackEffect.SetActive(false);
 
         switch (info.type)
         {

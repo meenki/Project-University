@@ -91,8 +91,7 @@ public class Admob : MonoBehaviour
                 Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
                 //SceneManager.LoadScene(nextSceneName);
                 Time.timeScale = 1.0f;
-                GameManager.Instance.DoneObj.SetActive(false); uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"
-uses - permission android: name = "com.google.android.                GameManager.Instance.life = GameManager.Instance.startLife;
+                GameManager.Instance.DoneObj.SetActive(false);
                 GameManager.Instance.lifeText.text = GameManager.Instance.life.ToString();
             });
         }

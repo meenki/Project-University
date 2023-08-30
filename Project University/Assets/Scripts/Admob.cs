@@ -8,6 +8,9 @@ using GoogleMobileAds.Api;
 using System;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Rendering;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
+using UnityEngine.Android;
+using System.Security;
 
 public class Admob : MonoBehaviour
 {
@@ -84,8 +87,13 @@ public class Admob : MonoBehaviour
         {
             rewardedAd.Show((Reward reward) =>
             {
+                loadingAd = false;
                 Debug.Log(String.Format(rewardMsg, reward.Type, reward.Amount));
-                SceneManager.LoadScene(nextSceneName);
+                //SceneManager.LoadScene(nextSceneName);
+                Time.timeScale = 1.0f;
+                GameManager.Instance.DoneObj.SetActive(false); uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"uses - permission android: name = "com.google.android.gms.permission.AD_ID"
+uses - permission android: name = "com.google.android.                GameManager.Instance.life = GameManager.Instance.startLife;
+                GameManager.Instance.lifeText.text = GameManager.Instance.life.ToString();
             });
         }
         //}
@@ -93,7 +101,6 @@ public class Admob : MonoBehaviour
 
     public void showAdmob(string sceneName)
     {
-        // 중복 로드 막는거. 어차피 씬을 새로 오픈하는거라 다른 곳에서 false해 줄 필요 없음
         if (!loadingAd)
         {
             nextSceneName = sceneName;

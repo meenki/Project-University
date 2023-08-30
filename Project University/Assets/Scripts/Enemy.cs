@@ -57,9 +57,10 @@ public class Enemy : MonoBehaviour
 
     public void Hit(Dice info)
     {
-        var damage = info.damage * GameManager.Instance.levelDamage[GameManager.Instance.diceLevel[(int)info.type]] * GameManager.Instance.upgradeDamage[info.level];
-      //  attackEffect.SetActive(false);
-
+        var damage = info.damage * GameManager.Instance.levelDamage[GameManager.Instance.diceLevel[(int)info.type] - 1] * GameManager.Instance.upgradeDamage[info.level - 1];
+        attackEffect.SetActive(false);
+        GameManager.Instance.playerAudioPlayer.PlayOneShot(GameManager.Instance.enemyDamege);
+     
         switch (info.type)
         {
             case DiceType.Fire:

@@ -25,6 +25,7 @@ public class IsClick : MonoBehaviour
         {
             if (TargetObj.activeSelf)
             {
+                Time.timeScale = 1.0f;
                 TargetObj.SetActive(false);
             }
             else

@@ -23,8 +23,14 @@ public class SettingButton : MonoBehaviour
     void ActiveSetting()
     {
         if (settingwindow.activeSelf)
+        {
+            Time.timeScale = 1.0f;
             settingwindow.SetActive(false);
+        }
         else
+        {
+            Time.timeScale = 0;
             settingwindow.SetActive(true);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 
 public class Dice : MonoBehaviour
@@ -21,7 +22,7 @@ public class Dice : MonoBehaviour
 
     List<Dice> collDiceList = new List<Dice>();
 
-    public void InitDice(DiceInfo info)
+    public void InitDice(DiceInfo info, int rand)
     {
         this.level = 1;
         this.type = info.Type;
@@ -29,6 +30,7 @@ public class Dice : MonoBehaviour
         this.attackSpeed = info.attackSpeed;
         elapsed = 0;
         target = null;
+        index = rand;
 
         switch (type)
         {
@@ -86,13 +88,14 @@ public class Dice : MonoBehaviour
             for(int i = 0; i < collDiceList.Count; i++)
             {
                 if (distacne > Vector3.Distance(collDiceList[i].transform.position, transform.position))
-                {
+                {                  
                     target = collDiceList[i];
                 }
             }
 
             if (target.type == this.type && target.level < 5 && target.level == this.level)
             {
+                GameManager.Instance.isInDice[index] = false;
                 target.LevelUpDice();
                 this.gameObject.SetActive(false);
             }

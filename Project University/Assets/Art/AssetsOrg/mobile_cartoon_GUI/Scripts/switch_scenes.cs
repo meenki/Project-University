@@ -10,8 +10,8 @@ public class switch_scenes : MonoBehaviour {
 	void Start () {
 		Button b = GetComponent<Button> ();
 		if (b != null && sceneName != "")
-		{
-			b.onClick.AddListener(() => {Application.LoadLevel(sceneName);});
+		{		
+            b.onClick.AddListener(() => {Application.LoadLevel(sceneName);});
 		}
 	}
 	

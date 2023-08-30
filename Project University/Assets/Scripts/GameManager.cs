@@ -60,13 +60,14 @@ public class GameManager : MonoBehaviour
     public int startSummonCost = 150;
     public int increaseSummonCost = 10;
 
-    public int[] upgradeCost = { 50, 100, 200, 400 };
+    public int[] upgradeCost = { 50, 100, 200, 400, 0 };
     public float[] upgradeDamage = { 1.0f, 1.2f, 1.4f, 1.6f, 1.8f };
     public float[] levelDamage = { 1.0f, 1.5f, 2.0f, 2.5f, 3.0f };
 
     public int startLife = 10;
     public int startMoney = 450;
     public int startKillMoney = 10;
+    public bool[] isInDice;
 
     [HideInInspector]
     public int curKillMoney = 10;
@@ -76,12 +77,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject killPrefab;
 
+    public AudioClip enemyDamege;
+    public AudioSource playerAudioPlayer;
 
     int wave = 0;
     int money = 0;
-    int life = 0;
+    public int life = 0;
     int summonCount = 0;
-    bool[] isInDice;
 
     GameObject hitObject = null;
     Vector3 objPrePos = Vector3.zero;
@@ -98,8 +100,10 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
+        playerAudioPlayer = GetComponent<AudioSource>();
         if (null == instance)
         {
+            Time.timeScale = 1.0f;
             instance = this;
         }
 
@@ -159,7 +163,7 @@ public class GameManager : MonoBehaviour
                 {
                     isInDice[rand] = true;
                     var type = Random.Range(0, (int)DiceType.End);
-                    diceBoard[rand].InitDice(diceInfo[type]);
+                    diceBoard[rand].InitDice(diceInfo[type], rand);
 
                     break;
                 }
@@ -169,6 +173,7 @@ public class GameManager : MonoBehaviour
             summonCount++;
             moneyText.text = money.ToString();
             summonCostText.text = (startSummonCost + summonCount * increaseSummonCost).ToString();
+
         }
     }
 
@@ -271,6 +276,7 @@ public class GameManager : MonoBehaviour
 
         if (life == 0)
         {
+            Time.timeScale = 0;
             GameOver();
         }
 
@@ -343,6 +349,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // °á°úÃ¢
+        int bestScore = PlayerPrefs.GetInt("BestScore");
+        if(bestScore < wave)
+            PlayerPrefs.SetInt("BestScore", wave);
+
         DoneObj.SetActive(true);
     }
 }
